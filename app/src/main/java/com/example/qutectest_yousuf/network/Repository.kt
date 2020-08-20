@@ -21,7 +21,7 @@ class Repository @Inject constructor(context: Context) {
     //Initialize
     private val remoteDataSource = RemoteDataSource(context)
 
-     fun userLogin(loginRQ: LoginRQ): Flowable<LoginRP> {
+    suspend fun userLogin(loginRQ: LoginRQ): LoginRP {
         return remoteDataSource.userLogin(loginRQ)
     }
 }

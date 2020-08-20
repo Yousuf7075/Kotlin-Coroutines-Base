@@ -1,17 +1,19 @@
 package com.example.qutectest_yousuf.ui.login
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.telecom.Call
 import android.util.Log
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.*
 import com.example.qutectest_yousuf.R
 import com.example.qutectest_yousuf.base.BaseActivity
 import com.example.qutectest_yousuf.databinding.ActivityLoginBinding
 import com.example.qutectest_yousuf.factory.ViewModelProviderFactory
+import com.example.qutectest_yousuf.ui.home.HomeActivity
 import com.example.qutectest_yousuf.ui.login.model.LoginRP
 import com.example.qutectest_yousuf.ui.login.model.LoginRQ
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -24,7 +26,7 @@ import okhttp3.Response
 import javax.inject.Inject
 import javax.security.auth.callback.Callback
 
-class LoginActivity : BaseActivity() {
+class LoginActivity : BaseActivity(){
 
     lateinit var activityLoginBinding: ActivityLoginBinding
     lateinit var loginRQ: LoginRQ
@@ -38,31 +40,41 @@ class LoginActivity : BaseActivity() {
         loginViewModel = ViewModelProviders.of(this, providerFactory)[LoginViewModel::class.java]
 
         activityLoginBinding.loginBtn.setOnClickListener {
-            observeViewModel()
+            showLoading()
+            checkUserInput()
         }
 
     }
 
-    @SuppressLint("CheckResult")
-    private  fun observeViewModel() {
+    private fun checkUserInput() {
         val userName = activityLoginBinding.userNameET.text.toString()
         val password = activityLoginBinding.passwordET.text.toString()
         if (userName.isNotEmpty() && password.isNotEmpty()){
             loginRQ = LoginRQ(userName, password)
             Log.e("RQ", loginRQ.toString())
-            loginViewModel.userLogin(loginRQ).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::onSuccess,this::onError)
+            loginViewModel.userLogin(loginRQ)
 
+            //fetch response
+            observeViewModel()
         }
     }
 
-    private fun onSuccess(loginRP: LoginRP){
-        Log.e("response", loginRP.toString())
+    private fun observeViewModel() {
+        loginViewModel.loginResponse.observe(this, Observer {
+            Log.e("res", it.toString())
+            if (it.msg == "Login Success"){
+                hideLoading()
+                Toast.makeText(this,"Login Success", Toast.LENGTH_LONG).show()
+                navigateToHomeActivity()
+            }else{
+                Toast.makeText(this,"error!!", Toast.LENGTH_LONG).show()
+            }
+        })
     }
 
-    private fun onError(throwable: Throwable){
-        Log.e("error", throwable.localizedMessage)
+    private fun navigateToHomeActivity() {
+        val intent = Intent(this, HomeActivity::class.java)
+        startActivity(intent)
     }
 
 }
