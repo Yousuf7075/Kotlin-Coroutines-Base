@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">QutecTest_Yousuf</string>
+    <string name="login">Login</string>
+    <string name="user_name">User name</string>
+    <string name="password">password</string>
 </resources>
