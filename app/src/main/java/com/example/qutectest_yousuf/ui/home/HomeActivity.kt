@@ -3,16 +3,21 @@ package com.example.qutectest_yousuf.ui.home
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.example.qutectest_yousuf.R
 import com.example.qutectest_yousuf.base.BaseActivity
+import com.example.qutectest_yousuf.databinding.ActivityHomeBinding
+import com.example.qutectest_yousuf.databinding.ActivityLoginBinding
 import com.example.qutectest_yousuf.factory.ViewModelProviderFactory
 import com.example.qutectest_yousuf.ui.login.LoginViewModel
 import javax.inject.Inject
 
 class HomeActivity : BaseActivity() {
+
+    lateinit var homeBinding: ActivityHomeBinding
 
     private lateinit var homeViewModel: HomeViewModel
     @set:Inject
@@ -20,7 +25,9 @@ class HomeActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        homeBinding = DataBindingUtil.setContentView(this,R.layout.activity_home)
+        setSupportActionBar(homeBinding.toolbar)
+        homeBinding.toolbar.title = "Home"
 
         homeViewModel = ViewModelProviders.of(this, providerFactory)[HomeViewModel::class.java]
         observeViewModel()
