@@ -10,15 +10,26 @@
         android:layout_height="match_parent"
         tools:context=".ui.login.LoginActivity">
 
-        <EditText
-            android:layout_marginTop="@dimen/_100sdp"
-            android:id="@+id/user_name_ET"
+        <ImageView
+            android:id="@+id/icon_iv"
+            android:layout_marginTop="@dimen/_80sdp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/ic_launcher_foreground"
+            android:background="@drawable/splash_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:layout_marginTop="@dimen/_15sdp"
+            android:id="@+id/user_name_ET"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/icon_iv"
             android:hint="@string/user_name"
-            android:paddingLeft="@dimen/_10sdp"
-            android:paddingRight="@dimen/_10sdp"
+            android:paddingLeft="@dimen/_80sdp"
+            android:paddingRight="@dimen/_80sdp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <EditText
@@ -27,22 +38,26 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/user_name_ET"
             android:hint="@string/password"
-            android:paddingLeft="@dimen/_10sdp"
-            android:paddingRight="@dimen/_10sdp"
+            android:paddingLeft="@dimen/_80sdp"
+            android:paddingRight="@dimen/_80sdp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-        <Button
+
+        <TextView
             android:id="@+id/login_btn"
-            android:background="#525FA5"
+            android:background="@drawable/btn_bg"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/password_ET"
             android:text="@string/login"
-            android:textColor="#fff"
+            android:textAllCaps="true"
+            android:textColor="@color/color_white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingRight="@dimen/_10sdp"
-            android:paddingLeft="@dimen/_10sdp"
+            android:paddingRight="@dimen/_45sdp"
+            android:paddingLeft="@dimen/_45sdp"
+            android:paddingTop="@dimen/_8sdp"
+            android:paddingBottom="@dimen/_8sdp"
             android:layout_marginTop="@dimen/_10sdp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
