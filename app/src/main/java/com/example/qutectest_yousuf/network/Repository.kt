@@ -3,6 +3,7 @@ package com.example.qutectest_yousuf.network
 import android.content.Context
 import androidx.lifecycle.LiveData
 import com.example.qutectest_yousuf.network.dataSource.RemoteDataSource
+import com.example.qutectest_yousuf.ui.home.model.HomeDataRP
 import com.example.qutectest_yousuf.ui.login.model.LoginRP
 import com.example.qutectest_yousuf.ui.login.model.LoginRQ
 import io.reactivex.Flowable
@@ -23,5 +24,9 @@ class Repository @Inject constructor(context: Context) {
 
     suspend fun userLogin(loginRQ: LoginRQ): LoginRP {
         return remoteDataSource.userLogin(loginRQ)
+    }
+
+    suspend fun getHomeData(): HomeDataRP{
+        return remoteDataSource.getHomeData()
     }
 }

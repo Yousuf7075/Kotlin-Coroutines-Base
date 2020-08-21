@@ -66,7 +66,8 @@ class LoginActivity : BaseActivity(){
                 hideLoading()
                 Toast.makeText(this,"Login Success", Toast.LENGTH_LONG).show()
                 navigateToHomeActivity()
-            }else{
+            }else if (it  == null){
+                hideLoading()
                 Toast.makeText(this,"error!!", Toast.LENGTH_LONG).show()
             }
         })

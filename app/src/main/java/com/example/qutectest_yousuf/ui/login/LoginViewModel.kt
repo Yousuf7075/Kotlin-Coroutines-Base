@@ -11,6 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.lang.Exception
 import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(private val repository: Repository): ViewModel() {
@@ -20,9 +21,13 @@ class LoginViewModel @Inject constructor(private val repository: Repository): Vi
     fun userLogin(loginRQ: LoginRQ) {
         viewModelScope.launch {
             withContext(Dispatchers.IO){
-                val response = repository.userLogin(loginRQ)
-                Log.e("res", response.toString())
-                loginResponse.postValue(response)
+                try {
+                    val response = repository.userLogin(loginRQ)
+                    Log.e("res", response.toString())
+                    loginResponse.postValue(response)
+                } catch (e: Exception){
+                    Log.e("error", e.localizedMessage)
+                }
             }
         }
     }

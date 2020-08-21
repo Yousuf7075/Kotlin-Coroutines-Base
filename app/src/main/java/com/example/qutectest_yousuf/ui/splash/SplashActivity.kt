@@ -18,17 +18,6 @@ class SplashActivity : BaseActivity() {
             val mainIntent = Intent(this@SplashActivity, LoginActivity::class.java)
             this@SplashActivity.startActivity(mainIntent)
             finish()
-
-            /*if (Hawk.contains(Constants.SAVED_USER_EMAIL)) {
-                val mainIntent =
-                    Intent(this@SplashActivity, LandingTabActivity::class.java)
-                this@SplashActivity.startActivity(mainIntent)
-                finish()
-            } else {
-                val mainIntent = Intent(this@SplashActivity, LoginActivity::class.java)
-                this@SplashActivity.startActivity(mainIntent)
-                finish()
-            }*/
         }, SPLASH_DISPLAY_TIMER.toLong())
     }
 }
