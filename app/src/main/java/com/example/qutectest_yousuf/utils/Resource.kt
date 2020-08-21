@@ -1,40 +1,15 @@
 package com.example.qutectest_yousuf.utils
 
-class Resource<T>(val status: AuthStatus, val data: T?, val message: String?) {
 
-    enum class AuthStatus {
-        SUCCESS, ERROR, LOADING
-    }
 
+
+data class Resource<out T>(val status: Status, val data: T?, val message: String?) {
     companion object {
-        @JvmStatic
-        fun <T> authenticated(data: T?): Resource<T> {
-            return Resource(
-                AuthStatus.SUCCESS,
-                data,
-                null
-            )
-        }
+        fun <T> success(data: T): Resource<T> = Resource(status = Status.SUCCESS, data = data, message = null)
 
-        @JvmStatic
-        fun <T> error(msg: String?,data: T?): Resource<T> {
-            return Resource(
-                AuthStatus.ERROR,
-                data,
-                msg
-            )
-        }
+        fun <T> error(data: T?, message: String): Resource<T> =
+            Resource(status = Status.ERROR, data = data, message = message)
 
-        @JvmStatic
-        fun <T> loading(data: T?): Resource<T> {
-            return Resource(
-                AuthStatus.LOADING,
-                data,
-                null
-            )
-        }
-
+        fun <T> loading(data: T?): Resource<T> = Resource(status = Status.LOADING, data = data, message = null)
     }
-
 }
-
