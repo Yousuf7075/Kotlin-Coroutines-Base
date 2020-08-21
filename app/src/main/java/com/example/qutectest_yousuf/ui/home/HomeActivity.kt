@@ -1,18 +1,15 @@
 package com.example.qutectest_yousuf.ui.home
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.example.qutectest_yousuf.R
 import com.example.qutectest_yousuf.base.BaseActivity
 import com.example.qutectest_yousuf.databinding.ActivityHomeBinding
-import com.example.qutectest_yousuf.databinding.ActivityLoginBinding
 import com.example.qutectest_yousuf.factory.ViewModelProviderFactory
-import com.example.qutectest_yousuf.ui.login.LoginViewModel
+import com.example.qutectest_yousuf.ui.home.model.HomeDataRP
 import javax.inject.Inject
 
 class HomeActivity : BaseActivity() {
@@ -36,6 +33,11 @@ class HomeActivity : BaseActivity() {
     private fun observeViewModel() {
         homeViewModel.homeDataResponse.observe(this, Observer {
             Log.e("res",it.toString())
+            initUi(it)
         })
+    }
+
+    private fun initUi(data: HomeDataRP) {
+
     }
 }
