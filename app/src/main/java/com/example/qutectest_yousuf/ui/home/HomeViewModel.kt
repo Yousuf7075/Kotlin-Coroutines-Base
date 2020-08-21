@@ -2,12 +2,11 @@ package com.example.qutectest_yousuf.ui.home
 
 import android.util.Log
 import android.widget.Toast
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.qutectest_yousuf.network.Repository
 import com.example.qutectest_yousuf.ui.home.model.HomeDataRP
+import com.example.qutectest_yousuf.ui.login.model.LoginRQ
+import com.example.qutectest_yousuf.utils.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -16,22 +15,12 @@ import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(private val repository: Repository): ViewModel() {
 
-    val homeDataResponse: LiveData<HomeDataRP> = MutableLiveData()
-
-    init {
-        viewModelScope.launch {
-            try {
-                homeDataResponse as MutableLiveData
-                homeDataResponse.value = getHomeData()
-            }catch (e: Exception){
-                Log.e("error", e.localizedMessage)
-            }
-        }
-    }
-
-    private suspend fun getHomeData(): HomeDataRP{
-        return withContext(Dispatchers.IO){
-            repository.getHomeData()
+    fun getHomeData() = liveData(Dispatchers.IO){
+        emit(Resource.loading(data = null))
+        try {
+            emit(Resource.success(data = repository.getHomeData()))
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
         }
     }
 

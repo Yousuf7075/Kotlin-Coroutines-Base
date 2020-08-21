@@ -3,6 +3,7 @@ package com.example.qutectest_yousuf.ui.home
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -13,6 +14,7 @@ import com.example.qutectest_yousuf.databinding.ActivityHomeBinding
 import com.example.qutectest_yousuf.factory.ViewModelProviderFactory
 import com.example.qutectest_yousuf.ui.home.model.Data
 import com.example.qutectest_yousuf.utils.CustomRecyclerItemSpaceDecoration
+import com.example.qutectest_yousuf.utils.Status
 import javax.inject.Inject
 
 
@@ -47,10 +49,23 @@ class HomeActivity : BaseActivity() {
     }
 
     private fun observeViewModel() {
-        homeViewModel.homeDataResponse.observe(this, Observer {
-            hideLoading()
-            Log.e("res",it.toString())
-            initAdapter(it.data as ArrayList<Data>)
+        homeViewModel.getHomeData().observe(this, Observer {
+            it.let {resource ->
+                when(resource.status){
+                    Status.SUCCESS ->{
+                        Log.e("data", resource.data.toString())
+                        hideLoading()
+                        initAdapter(resource.data!!.data as ArrayList<Data>)
+                    }
+                    Status.LOADING ->{
+                        showLoading()
+                    }
+                    Status.ERROR -> {
+                        hideLoading()
+                        Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
         })
     }
 
