@@ -27,7 +27,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/_1"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/color_black"
                     android:textSize="@dimen/_15sdp" />
 
                 <LinearLayout
@@ -49,7 +49,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/about_me"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/color_black"
                     android:textSize="@dimen/_15sdp"/>
 
                 <LinearLayout
@@ -72,7 +72,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/_21_08_2020"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/color_black"
                     android:textSize="@dimen/_15sdp"/>
 
                 <LinearLayout
@@ -99,7 +99,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/dhaka_bangladesh"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/color_black"
                     android:textSize="@dimen/_15sdp"
                     android:layout_marginRight="@dimen/_15sdp"
                     android:layout_marginEnd="@dimen/_15sdp"

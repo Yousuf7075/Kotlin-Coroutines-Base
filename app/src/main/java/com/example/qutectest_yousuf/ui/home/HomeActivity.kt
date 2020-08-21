@@ -1,5 +1,6 @@
 package com.example.qutectest_yousuf.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.databinding.DataBindingUtil
@@ -11,13 +12,13 @@ import com.example.qutectest_yousuf.base.BaseActivity
 import com.example.qutectest_yousuf.databinding.ActivityHomeBinding
 import com.example.qutectest_yousuf.factory.ViewModelProviderFactory
 import com.example.qutectest_yousuf.ui.home.model.Data
-import com.example.qutectest_yousuf.ui.home.model.HomeDataRP
 import com.example.qutectest_yousuf.utils.CustomRecyclerItemSpaceDecoration
 import javax.inject.Inject
 
+
 class HomeActivity : BaseActivity() {
 
-    lateinit var homeBinding: ActivityHomeBinding
+    private lateinit var homeBinding: ActivityHomeBinding
 
     private lateinit var homeViewModel: HomeViewModel
     @set:Inject
@@ -26,12 +27,23 @@ class HomeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         homeBinding = DataBindingUtil.setContentView(this,R.layout.activity_home)
-        setSupportActionBar(homeBinding.toolbar)
-        homeBinding.toolbar.title = "Home"
+        initToolbar()
 
         homeViewModel = ViewModelProviders.of(this, providerFactory)[HomeViewModel::class.java]
         showLoading()
         observeViewModel()
+    }
+
+    override fun onBackPressed() {
+        val intent = Intent(Intent.ACTION_MAIN)
+        intent.addCategory(Intent.CATEGORY_HOME)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+    }
+
+    private fun initToolbar() {
+        setSupportActionBar(homeBinding.toolbar)
+        homeBinding.toolbar.title = "Home"
     }
 
     private fun observeViewModel() {
