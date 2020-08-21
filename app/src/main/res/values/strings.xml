@@ -4,4 +4,12 @@
     <string name="user_name">User name</string>
     <string name="password">password</string>
     <string name="title">title</string>
+    <string name="id">Id:</string>
+    <string name="_1">1</string>
+    <string name="about_me">about me</string>
+    <string name="title1">title:</string>
+    <string name="survey_date">Survey date:</string>
+    <string name="survey_area">Survey area:</string>
+    <string name="dhaka_bangladesh">Dhaka Bangladesh bogura rajshahi, natore naogan bogura</string>
+    <string name="_21_08_2020">21-08-2020</string>
 </resources>
