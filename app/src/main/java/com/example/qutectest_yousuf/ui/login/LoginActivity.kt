@@ -56,19 +56,19 @@ class LoginActivity : BaseActivity(){
 
             //fetch response
             observeViewModel()
+        }else{
+            hideLoading()
+            Toast.makeText(this, "user name or password missing!", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun observeViewModel() {
         loginViewModel.loginResponse.observe(this, Observer {
+            hideLoading()
             Log.e("res", it.toString())
             if (it.msg == "Login Success"){
-                hideLoading()
                 Toast.makeText(this,"Login Success", Toast.LENGTH_LONG).show()
                 navigateToHomeActivity()
-            }else if (it  == null){
-                hideLoading()
-                Toast.makeText(this,"error!!", Toast.LENGTH_LONG).show()
             }
         })
     }
