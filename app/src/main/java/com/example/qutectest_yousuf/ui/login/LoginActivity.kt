@@ -29,7 +29,6 @@ class LoginActivity : BaseActivity(){
         loginViewModel = ViewModelProviders.of(this, providerFactory)[LoginViewModel::class.java]
 
         activityLoginBinding.loginBtn.setOnClickListener {
-            showLoading()
             checkUserInput()
         }
 
@@ -45,7 +44,6 @@ class LoginActivity : BaseActivity(){
             //fetch response
             observeViewModel(loginRQ)
         }else{
-            hideLoading()
             Toast.makeText(this, "user name or password missing!", Toast.LENGTH_SHORT).show()
         }
     }

@@ -1,6 +1,5 @@
 package com.example.qutectest_yousuf
 
-import com.example.qutectest_yousuf.di.AppComponent
 import com.example.qutectest_yousuf.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication

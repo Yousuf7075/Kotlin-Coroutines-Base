@@ -32,7 +32,6 @@ class HomeActivity : BaseActivity() {
         initToolbar()
 
         homeViewModel = ViewModelProviders.of(this, providerFactory)[HomeViewModel::class.java]
-        showLoading()
         observeViewModel()
     }
 
